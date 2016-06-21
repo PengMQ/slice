@@ -35,5 +35,21 @@ arr.slice(indexBegin, indexEnd)
   console.log(fruitBasket[0].color); //'green'
   console.log(newFruitBasket[0].color); //'green'
 
+3: slice() 把array like的对象转换成array
 
+  function toArray(){
+    console.log(this);
+    console.log(arguments)
+    return Array.prototype.slice.call(arguments);
+  };
+   toArray(1, 2, 3) //[1, 2, 3]
+
+4: Function.prototype.call 绑定slice
+   3的代码可以重构为
+   var unBoundSlice = Array.prototype.slice;
+   var slice = Function.prototype.call.bind(unBoundSlice);
+   function toArray(){
+    return slice(arguments);
+   };
+   toArray(1, 2, 3) //[1, 2, 3]
 
